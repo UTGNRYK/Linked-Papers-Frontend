@@ -25,14 +25,6 @@ const router = createRouter({
                 meta: {title: '主页'}
             },
             {
-                path: '/paperList',
-                name: 'paperList',
-                component: () => import('../views/order/PaperList.vue'),
-                meta: {
-                    title: '论文列表',
-                }
-            },
-            {
                 path: '/paperDetail/:storeId',
                 name: 'paperDetail',
                 component: () => import('../views/paper/PaperDetail.vue'),

@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getRelatedPaperById } from "../../api/paper";
-import PaperItem from "../components/PaperItem.vue";
+import PaperItem from "../../components/PaperItem.vue";
 import { ElPagination } from "element-plus";
 
 interface Paper {

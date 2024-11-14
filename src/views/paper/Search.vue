@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { searchByKeyword } from "../../api/paper";
-import PaperItem from "../components/PaperItem.vue";
+import PaperItem from "../../components/PaperItem.vue";
 import { ElButton, ElInput, ElPagination } from "element-plus";
 
 // 定义 Paper 接口
