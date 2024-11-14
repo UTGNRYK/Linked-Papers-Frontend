@@ -8,17 +8,19 @@ import {userInfo, userLogin} from "../../api/user.ts"
 const email = ref('')
 const password = ref('')
 
-// 电话号码是否为空
-const hasTelInput = computed(() => email.value != '')
+
+// 邮箱是否为空
+const hasEmailInput = computed(() => email.value !== '');
 // 密码是否为空
 const hasPasswordInput = computed(() => password.value != '')
-// 电话号码的规则
-const chinaMobileRegex = /^1(3[0-9]|4[579]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[189])\d{8}$/
-const telLegal = computed(() => chinaMobileRegex.test(email.value))
+
+// Email 格式验证正则
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const isEmailValid = computed(() => emailRegex.test(email.value));
 // 密码不设置特殊规则
 // 登录按钮可用性
 const loginDisabled = computed(() => {
-  return !(hasTelInput.value && telLegal.value && hasPasswordInput.value)
+  return !(hasEmailInput.value && isEmailValid.value && hasPasswordInput.value)
 })
 
 // 登录按钮触发
@@ -64,12 +66,12 @@ function handleLogin() {
         <h1>登入您的账户</h1>
         <el-form>
           <el-form-item>
-            <label v-if="!hasTelInput" for="tel">注册手机号</label>
-            <label v-else-if="!telLegal" for="tel" class="error-warn">手机号不合法</label>
-            <label v-else for="tel">注册手机号</label>
+            <label v-if="!hasEmailInput" for="tel">注册邮箱</label>
+            <label v-else-if="!isEmailValid" for="tel" class="error-warn">邮箱格式不合法</label>
+            <label v-else for="tel">注册邮箱</label>
             <el-input id="tel" type="text" v-model="email"
-                      required :class="{'error-warn-input' :(hasTelInput && !telLegal)}"
-                      placeholder="请输入手机号"/>
+                      required :class="{'error-warn-input' :(hasEmailInput && !isEmailValid)}"
+                      placeholder="请输入邮箱"/>
           </el-form-item>
 
           <el-form-item>
